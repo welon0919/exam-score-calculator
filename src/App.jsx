@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import './App.css'
-import Subject from './subject'
+import Subject from './Subject.jsx'
 import { Button } from '@chakra-ui/react'
 const subjects = [
     "國文",
