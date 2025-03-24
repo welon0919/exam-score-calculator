@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Switch } from "@chakra-ui/react";
 
-export default function Subject({ setSubjectCallback, subject, setSubjectUsed }) {
+export default function Subject({ setSubjectCallback, subject, setSubjectUsed, maxScore=100 }) {
     const [inputValue, setInputValue] = useState(0);
     const [checked, setChecked] = useState(true);
 
@@ -17,7 +17,7 @@ export default function Subject({ setSubjectCallback, subject, setSubjectUsed })
     const onInputChange = (e) => {
         const val = e.target.value;
         if (!/^\d*$/.test(val)) return; // 只允許數字輸入
-        const numVal = Math.min(100, Math.max(0, Number(val))); // 限制範圍 0-100
+        const numVal = Math.min(maxScore, Math.max(0, Number(val))); // 限制範圍 0-100
         setInputValue(numVal);
 
         // 更新分數，避免重複項目

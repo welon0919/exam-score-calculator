@@ -12,6 +12,7 @@ const subjects = [
     "地理",
     "公民",
     "ESL ",
+    "國寫"
 ]
 const weights = {
     "國文": 5,
@@ -22,6 +23,7 @@ const weights = {
     "地理": 2,
     "公民": 2,
     "ESL ": 1,
+    "國寫":5,
 }
 function App() {
     const [subjectScores, setSubjectScores] = useState(Object.fromEntries(subjects.map(subject => [subject,0])))
@@ -53,7 +55,12 @@ function App() {
                 <h1>加權分數計算機</h1>
                 {
                     subjects.map((subject, index) => (
-                        <Subject setSubjectUsed={setSubjectsUsed} setSubjectCallback={setSubjectScores} subject={subject} key={index}/>
+                        <Subject 
+                        setSubjectUsed={setSubjectsUsed} 
+                        setSubjectCallback={setSubjectScores}
+                        maxScore={subject === "國寫" ? 6 : 100}
+                        subject={subject}
+                        key={index}/>
                     ))
                 }
                 <Button variant="subtle" style={{fontSize:"2rem", paddingTop:"10px", paddingBottom:"10px"}} onClick={calculate}>計算</Button>
