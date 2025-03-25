@@ -18,7 +18,7 @@ export default function Subject({ setSubjectCallback, subject, setSubjectUsed, m
         const val = e.target.value;
         if (!/^\d*$/.test(val)) return; // 只允許數字輸入
         const numVal = Math.min(maxScore, Math.max(0, Number(val))); // 限制範圍 0-100
-        setInputValue(numVal);
+        setInputValue(numVal);  // Set as a number
 
         // 更新分數，避免重複項目
         setSubjectCallback((prev) => {
@@ -40,7 +40,7 @@ export default function Subject({ setSubjectCallback, subject, setSubjectUsed, m
                 type="number"
                 className="score-input"
                 onChange={onInputChange}
-                value={inputValue}
+                value={inputValue.toString()} // Make sure to convert the number to a string for rendering
                 disabled={!checked}
             />
         </div>
