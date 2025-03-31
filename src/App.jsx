@@ -50,6 +50,7 @@ function App() {
         setWeightedSum(totalSum)
         setWeightedLoss(totalWeight * 100 - totalSum)
         setWeightedAvg(totalSum / totalWeight)
+        window.scrollTo(0,document.body.scrollHeight)
     }
     return (
         <>
