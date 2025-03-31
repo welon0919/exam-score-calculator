@@ -38,8 +38,6 @@ function App() {
     const calculate= () => {
         setCalculated(true)
 
-        console.log(subjectScores)
-        console.log(subjectsUsed)
         let totalWeight = 0;
         let totalSum = 0
         subjects.forEach(subject => {

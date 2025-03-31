@@ -17,7 +17,6 @@ export default function Subject({ setSubjectCallback, subject, setSubjectUsed, m
     const onInputChange = (e) => {
         const val = e.target.value;
         if (!/^\d*(\.\d+)?$/.test(val)) return; // 只允許數字輸入
-        console.log(Number(val))
         const numVal = Math.min(maxScore, Math.max(0, parseFloat(val))); // 限制範圍 0-100
         setInputValue(numVal);  // Set as a number
 
@@ -38,7 +37,7 @@ export default function Subject({ setSubjectCallback, subject, setSubjectUsed, m
             </Switch.Root>
             <h1>{subject}</h1>
             <input
-                type="number"
+                type="text"
                 className="score-input"
                 onChange={onInputChange}
                 value={inputValue.toString()} // Make sure to convert the number to a string for rendering
