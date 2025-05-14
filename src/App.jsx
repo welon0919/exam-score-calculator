@@ -1,5 +1,6 @@
 
-import { useEffect, useState } from 'react'
+import { 
+     useState } from 'react'
 import './App.css'
 import Subject from './Subject.jsx'
 import { Button } from '@chakra-ui/react'
@@ -13,7 +14,6 @@ const subjects = [
     "地理",
     "公民",
     "ESL ",
-    "國寫"
 ]
 const weights = {
     "國文": 5,
@@ -25,7 +25,6 @@ const weights = {
     "地理": 2,
     "公民": 2,
     "ESL ": 1,
-    "國寫":5,
 }
 function App() {
     const [subjectScores, setSubjectScores] = useState(Object.fromEntries(subjects.map(subject => [subject,0])))
@@ -59,7 +58,7 @@ function App() {
                         <Subject 
                         setSubjectUsed={setSubjectsUsed} 
                         setSubjectCallback={setSubjectScores}
-                        maxScore={subject === "國寫" ? 6 : 100}
+                        maxScore={ 100}
                         subject={subject}
                         key={index}/>
                     ))
