@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Switch } from "@chakra-ui/react";
+function isPotentialPlainNumber(str) {
+  const trimmed = str.trim();
+  return /^[-+]?(\d+\.?\d*|\.\d*)?$/.test(trimmed);
+}
 
 export default function Subject({
   setSubjectCallback,
   subject,
   setSubjectUsed,
-  maxScore = 100,
 }) {
   const [inputValue, setInputValue] = useState(0);
   const [checked, setChecked] = useState(true);
@@ -21,7 +24,6 @@ export default function Subject({
   // 處理輸入變更
   const onInputChange = (e) => {
     const val = e.target.value;
-    if (!/^\d*(\.\d+)?$/.test(val)) return; // 只允許數字輸入
     if (val === "") {
       setInputValue("");
       setSubjectCallback((prev) => {
@@ -29,14 +31,26 @@ export default function Subject({
       });
       return;
     }
-    const numVal = Math.min(maxScore, Math.max(0, parseFloat(val))); // 限制範圍 0-100
-
-    setInputValue(numVal); // Set as a number
+    if (!isPotentialPlainNumber(val)) return;
+    const numVal = parseFloat(val); // 限制範圍 0-100
+    if (numVal >= 100) {
+      setInputValue("100");
+      setSubjectCallback((prev) => {
+        return { ...prev, [subject]: 100 };
+      });
+    } else if (numVal <= 0) {
+      setInputValue("0");
+      setSubjectCallback((prev) => {
+        return { ...prev, [subject]: 0 };
+      });
+    } else {
+      setInputValue(val.replace(/^0+(?!$)/, "")); // Set as a number
+      setSubjectCallback((prev) => {
+        return { ...prev, [subject]: numVal };
+      });
+    }
 
     // 更新分數，避免重複項目
-    setSubjectCallback((prev) => {
-      return { ...prev, [subject]: numVal };
-    });
   };
 
   return (
